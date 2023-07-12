@@ -1,42 +1,32 @@
-# Slowpoke
+# Brokepoke
 
-[Rack::Timeout](https://github.com/heroku/rack-timeout) enhancements for Rails
+404 page enhancements for Rails
 
-- safer service timeouts
-- dynamic timeouts
+- safer service errors
 - custom error pages
-
-[![Build Status](https://github.com/ankane/slowpoke/workflows/build/badge.svg?branch=master)](https://github.com/ankane/slowpoke/actions)
 
 ## Installation
 
 Add this line to your application’s Gemfile:
 
 ```ruby
-gem "slowpoke"
+gem "brokepoke"
 ```
 
 And run:
 
 ```sh
-rails generate slowpoke:install
+rails generate brokepoke:install
 ```
 
-This creates a `public/503.html` you can customize.
+This creates a `public/404.html` you can customize.
 
 ## Development
 
 To try out custom error pages in development, temporarily add to `config/environments/development.rb`:
 
 ```ruby
-config.slowpoke.timeout = 1
 config.consider_all_requests_local = false
-```
-
-And add a `sleep` call to one of your actions:
-
-```ruby
-sleep(2)
 ```
 
 The custom error page should appear.
@@ -58,17 +48,9 @@ config.slowpoke.timeout = lambda do |env|
 end
 ```
 
-Subscribe to timeouts with:
-
-```ruby
-ActiveSupport::Notifications.subscribe "timeout.slowpoke" do |name, start, finish, id, payload|
-  # report timeout
-end
-```
-
 To learn more, see the [Rack::Timeout documentation](https://github.com/heroku/rack-timeout).
 
-## Safer Service Timeouts
+## Safer Service Errors
 
 Rack::Timeout can raise an exception at any point in the code, which can leave your app in an [unclean state](https://www.schneems.com/2017/02/21/the-oldest-bug-in-ruby-why-racktimeout-might-hose-your-server/). The safest way to recover from a request timeout is to spawn a new process. This is the default behavior for Slowpoke.
 
