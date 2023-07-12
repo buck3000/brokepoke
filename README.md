@@ -1,6 +1,6 @@
 # Brokepoke
 
-404 page enhancements for Rails
+404 page enhancements for Rails - forked from AnKane who is my coding idol. Trying to see if I can re-invent this to be a Rails gem for better prod 40X error pages.
 
 - safer service errors
 - custom error pages
